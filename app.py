@@ -70,17 +70,5 @@ def index():
     return render_template('home.html', form=form)
 
 
-@app.route('/prediction')
-def prediction():
-
-    content = {}
-
-    content['input_text'] = session['input_text']
-
-    results = return_prediction(model=text_model,sample_json=content)
-
-    return render_template('prediction.html',results=results)
-
-
 if __name__ == '__main__':
     app.run(debug=True)
