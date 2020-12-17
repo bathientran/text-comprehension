@@ -1,0 +1,21 @@
+<div style="height:100%; width:100%; display:flex; justify-content: center; align-items: center;">
+    <div style="margin-right: 40px; height: 30%">
+        <h1 style="font-family:Helvetica">Welcome to text complexity predictions</h1>
+        <h4 style="font-family:Helvetica">Please enter your text</h4>
+        {% if result %}
+            <p style="font-family:Helvetica">The predicted class is: 
+                <a style="color:red; font-family: Helvetica">
+                    {{result}}
+                </a>
+            </p>
+        {% endif %}
+    </div>
+    <form  method="POST" style="font-family:Helvetica; padding: 20px 20px; text-align: center;">
+        {# This hidden_tag is a CSRF security feature. #}
+        {{ form.hidden_tag() }}
+        {{form.input_text(rows='20',cols='50')}}
+        <br>
+        <br>
+        {{ form.submit() }}
+    </form>
+</div>
