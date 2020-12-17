@@ -67,7 +67,8 @@ def index():
 
     #     return render_template('home.html', form=form, result=result)
 
-    return render_template('home.html', form=form)
+    # return render_template('home.html', form=form)
+    return "<h1>Welcome to Geeks for Geeks</h1>"
 
 
 if __name__ == '__main__':
