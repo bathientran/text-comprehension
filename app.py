@@ -37,7 +37,7 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'someRandomKey'
 
 
-REMEMBER TO LOAD THE MODEL AND THE SCALER!
+# REMEMBER TO LOAD THE MODEL AND THE SCALER!
 text_model = load_model("model.h5")
 
 
