@@ -38,7 +38,7 @@ app.config['SECRET_KEY'] = 'someRandomKey'
 
 
 # REMEMBER TO LOAD THE MODEL AND THE SCALER!
-text_model = models.load_model("model.h5")
+text_model = models.load_model("new_model.h5")
 
 
 # Now create a WTForm Class
