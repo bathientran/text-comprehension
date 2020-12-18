@@ -6,7 +6,7 @@ from wtforms.validators import NumberRange
 import numpy as np  
 import spacy
 import en_core_web_sm
-# from tensorflow.keras.models import load_model
+from tensorflow-cpu.keras.models import load_model
 
 
 
