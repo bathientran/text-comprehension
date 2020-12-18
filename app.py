@@ -3,10 +3,10 @@ from flask_wtf import FlaskForm
 from wtforms import TextAreaField,SubmitField
 from wtforms.validators import NumberRange
 
-import numpy as np  
-import spacy
-import en_core_web_sm
-from tensorflow.keras.models import load_model
+# import numpy as np  
+# import spacy
+# import en_core_web_sm
+# from tensorflow.keras.models import load_model
 
 
 
@@ -33,7 +33,7 @@ from tensorflow.keras.models import load_model
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 # Configure a secret SECRET_KEY
 # We will later learn much better ways to do this!!
 app.config['SECRET_KEY'] = 'someRandomKey'
