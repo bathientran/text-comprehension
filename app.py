@@ -6,7 +6,7 @@ from wtforms.validators import NumberRange
 import numpy as np  
 import spacy
 import en_core_web_sm
-from keras.models import load_model
+from keras import models
 
 # def return_prediction(model,text):
 #     difficulty_map = {
