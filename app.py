@@ -52,7 +52,7 @@ class TextForm(FlaskForm):
     submit = SubmitField('Analyze')
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
 
     # Create instance of the form.
