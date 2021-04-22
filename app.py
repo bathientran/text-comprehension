@@ -1,6 +1,6 @@
-from flask import Flask, render_template, session, redirect, url_for, session
+from flask import Flask, render_template, session, redirect, url_for, session, request
 from flask_wtf import FlaskForm
-from wtforms import TextAreaField,SubmitField
+from wtforms import TextAreaField,SubmitField,StringField, SelectField
 from wtforms.validators import NumberRange
 
 import numpy as np  
@@ -44,6 +44,11 @@ text_model = models.load_model("new_model.h5")
 # Now create a WTForm Class
 # Lots of fields available:
 # http://wtforms.readthedocs.io/en/stable/fields.html
+class InfoForm(FlaskForm):
+    name = StringField('name')
+    perception = SelectField('difficulty', choices=[('easy','Easy'),('intermediate','Intermediate'),('hard','Hard')])
+    save = SubmitField('Save')
+
 class TextForm(FlaskForm):
     input_text = TextAreaField('input_text')
 
@@ -52,20 +57,27 @@ class TextForm(FlaskForm):
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-
+    print(session.get('submitted',None))
+    analyzed = request.args.get('analyzed')
     # Create instance of the form.
     form = TextForm()
+    form_2 = InfoForm()
     # If the form is valid on submission (we'll talk about validation next)
-    if form.validate_on_submit():
+    if form.validate_on_submit() and form.input_text.data != "":
         # Grab the data from the breed on the form.
-
+        session['text'] = form.input_text.data
+        session['submitted'] = True
         input_text = form.input_text.data
 
         result = return_prediction(model=text_model,text=input_text)
 
-        return render_template('home.html', form=form, result=result)
+        return render_template('home.html', form=form, form_2=form_2, result=result)
 
-    return render_template('home.html', form=form)
+    if form_2.validate_on_submit() and form_2.name != "" and form_2.perception != "":
+        session['submitted'] = False
+        return render_template('home.html', form=form, form_2=form_2)
+
+    return render_template('home.html', form=form, form_2=form_2)
 
 
 if __name__ == '__main__':

@@ -1,21 +1,64 @@
-<div style="height:100%; width:100%; display:flex; justify-content: center; align-items: center;">
-    <div style="margin-right: 40px; height: 30%">
-        <h1 style="font-family:Helvetica">Welcome to text complexity predictions</h1>
-        <h4 style="font-family:Helvetica">Please enter your text</h4>
-        {% if result %}
-            <p style="font-family:Helvetica">The predicted class is: 
-                <a style="color:red; font-family: Helvetica">
-                    {{result}}
-                </a>
-            </p>
-        {% endif %}
-    </div>
-    <form  method="POST" style="font-family:Helvetica; padding: 20px 20px; text-align: center;">
-        {# This hidden_tag is a CSRF security feature. #}
-        {{ form.hidden_tag() }}
-        {{form.input_text(rows='20',cols='50')}}
-        <br>
-        <br>
-        {{ form.submit() }}
+<div
+  style="
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Helvetica;
+  "
+>
+  <div style="margin-right: 40px; height: 30%">
+    <h1 style="font-family: Helvetica">
+      Welcome to text complexity predictions
+    </h1>
+    <h4 style="font-family: Helvetica">Please enter your text</h4>
+    {% if result %}
+    <p style="font-family: Helvetica">
+      The predicted class is:
+      <a style="color: red; font-family: Helvetica"> {{result}} </a>
+    </p>
+    <hr />
+    <h4>
+      If you want to improve predictions, please save the data under your name.
+    </h4>
+    <form method="POST" id="2">
+      {{ form_2.hidden_tag() }}
+      <div style="display: flex; align-items: center; height: 30px">
+        <span style="padding-right: 20px">Your name:</span>
+        {{form_2.name(form="2")}}
+      </div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          height: 30px;
+          padding-bottom: 20px;
+        "
+      >
+        <span style="padding-right: 20px">Your perceived difficulty:</span>
+        {{form_2.perception(form="2")}}
+      </div>
+      {{form_2.save(form="2") }}
     </form>
+    {% if error %} {{error}} {% endif %}
+    <!-- <p>
+      How difficult did you find the text?
+      <a href="{{ url_for('index') }}"><button>Easy</button></a>
+      <a href="{{ url_for('index') }}"><button>Intermediate</button></a>
+      <a href="{{ url_for('index') }}"><button>Difficult</button></a>
+    </p> -->
+    {% endif %}
+  </div>
+  <form
+    id="1"
+    method="POST"
+    style="font-family: Helvetica; padding: 20px 20px; text-align: center"
+  >
+    {# This hidden_tag is a CSRF security feature. #} {{ form.hidden_tag() }}
+    {{form.input_text(rows='20',cols='50',form="1")}}
+    <br />
+    <br />
+    {{ form.submit(form="1") }}
+  </form>
 </div>
